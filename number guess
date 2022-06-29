@@ -1,0 +1,25 @@
+import random
+import board
+import neopixel # import leds
+import time # allows us to have statements delaying
+from digitalio import DigitalInOut, Direction, Pull
+
+led = neopixel.NeoPixel(board.NEOPIXEL, 10)
+led.brightness = 0.1
+
+guess = int(input("Guess a number between 1 to 10: "))
+tries = 0
+secret = random.randint(1, 10)
+
+while guess != secret:
+    guess = int(input("Guess a number between 1 and 10: "))
+    tries = tries + 1 #number of incorrect guesses
+    print("you have made "  + str(tries) + "incorrect guesses")
+    for i in range(len(led)):
+        led[i] = (255, 0, 0)
+        led.show()
+   
+if(guess == secret):
+    print("yea LESGO")
+    led[i] = (0, 255, 0)
+    led.show()
